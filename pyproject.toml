@@ -6,6 +6,7 @@ authors = ["Joao Costa <joao.costa@duartecon.com.br>"]
 readme = "README.md"
 packages = [{include = "converso_webm"}]
 
+
 [tool.poetry.dependencies]
 python = "^3.11"
 moviepy = "^1.0.3"
@@ -23,6 +24,25 @@ taskipy = "^1.11.0"
 mkdocs-material = "^9.1.16"
 mkdocstrings = "^0.22.0"
 mkdocstrings-python = "^1.1.2"
+
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = "pytest-modules" 
+
+
+[tool.isort]
+profile = black
+line_length = 79
+
+
+[tool.taskipy.task]
+lint = "blue --check --diff . && isort --check --diff."
+docs = "mkdocs serve"
+pre_test = "task lint"
+test = "pytest -x -x cov=converso_webm --vv"
+post_test = coverage html
+
 
 [build-system]
 requires = ["poetry-core"]
