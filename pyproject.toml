@@ -9,7 +9,7 @@ packages = [{include = "converso_webm"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-moviepy = "^1.0.3"
+ffmpeg-python = "^0.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -28,7 +28,7 @@ mkdocstrings-python = "^1.1.2"
 
 [tool.pytest.ini_options]
 pythonpath = "."
-addopts = "pytest-modules" 
+addopts = "--doctest-modules" 
 
 
 [tool.isort]
@@ -36,11 +36,11 @@ profile = "black"
 line_length = 79
 
 
-[tool.taskipy.task]
-lint = "blue --check --diff . && isort --check --diff."
+[tool.taskipy.tasks]
+lint = "blue --check --diff . && isort --check --diff ."
 docs = "mkdocs serve"
 pre_test = "task lint"
-test = "pytest -x -x cov=converso_webm --vv"
+test = "pytest -x -x --cov=converso_webm -vv"
 post_test = "coverage html"
 
 

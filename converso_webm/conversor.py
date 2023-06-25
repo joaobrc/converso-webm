@@ -1,23 +1,27 @@
-from moviepy.editor import VideoFileClip
-import os
-from pathlib import Path
+from tkinter import filedialog
+
+import ffmpeg
 
 
+def chose_file_webmovie():
+    file_path = filedialog.askopenfilename(
+        defaultextension=['webm'], filetypes=[('WebMovie', 'webm')]
+    )
+    return file_path
 
 
+def save_file():
+    file_name = filedialog.asksaveasfilename(
+        defaultextension='mp4', filetypes=[('MP4 File', 'mp4')]
+    )
 
-def converso(caminho_video_web:str, caminho_video_saida:str):
-    """
-    >>> converso(r'C:\Users\joao.costa\Documents\screen-capture (8).webm', r'C:\Users\joao.costa\Documents\lace.mp4")
-    'C:\Users\joao.costa\Documents\lace.mp4
-    """
-    
-    
-    video_converter = VideoFileClip(caminho_video_web)
-    video_converter.write_videofile(caminho_video_saida)
-    
-    return print(caminho_video_saida)
-    
+    return file_name
 
 
+def converte_file():
 
+    file_web = chose_file_webmovie()
+    video = ffmpeg.input(filename=file_web)
+    video_out = video.output(save_file()).run()
+
+    return 'ok'
