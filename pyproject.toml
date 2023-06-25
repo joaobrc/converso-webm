@@ -32,7 +32,7 @@ addopts = "pytest-modules"
 
 
 [tool.isort]
-profile = black
+profile = "black"
 line_length = 79
 
 
@@ -41,7 +41,7 @@ lint = "blue --check --diff . && isort --check --diff."
 docs = "mkdocs serve"
 pre_test = "task lint"
 test = "pytest -x -x cov=converso_webm --vv"
-post_test = coverage html
+post_test = "coverage html"
 
 
 [build-system]
