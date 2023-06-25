@@ -19,7 +19,10 @@ def save_file():
 
 
 def converte_file():
-
+    """
+    >>> converte_file()
+    'ok'
+    """
     file_web = chose_file_webmovie()
     video = ffmpeg.input(filename=file_web)
     video_out = video.output(save_file()).run()
